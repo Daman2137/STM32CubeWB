@@ -72,9 +72,9 @@ void APPE_Init( void )
    */
   UTIL_LPM_SetOffMode(1 << CFG_LPM_APP, UTIL_LPM_DISABLE);
 
-  Led_Init();
+//  Led_Init();
 
-  Button_Init();
+//  Button_Init();
   
   /* clock enable periph CRC */
   LL_C2_AHB1_GRP1_EnableClock(LL_C2_AHB1_GRP1_PERIPH_CRC);
@@ -431,13 +431,18 @@ void HAL_GPIO_EXTI_Callback( uint16_t GPIO_Pin )
       APP_BLE_Key_Button1_Action();
       break; 
 
-    case BUTTON_SW2_PIN:
-      APP_BLE_Key_Button2_Action();
-      break; 
+//    case BUTTON_SW2_PIN:
+//      APP_BLE_Key_Button2_Action();
+//      break;
 
     case BUTTON_SW3_PIN:
       APP_BLE_Key_Button3_Action();
       break;
+
+    case B4_Pin:
+//	  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+      NVIC_SystemReset();
+	  break;
 
     default:
       break;

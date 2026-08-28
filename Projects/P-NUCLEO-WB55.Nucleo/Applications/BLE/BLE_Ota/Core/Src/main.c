@@ -45,6 +45,7 @@
 #include "stm32_lpm.h"
 #include "stm32_seq.h"
 #include "dbg_trace.h"
+#include "gpio.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
@@ -77,7 +78,6 @@ int main( void )
   __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_OPTVERR);
 
   HAL_Init();
-
   Reset_Device();
 
   /**
@@ -86,11 +86,19 @@ int main( void )
    */
   SystemClock_Config(); /**< Configure the system clock */
 
-  Init_Exti( );
+//  Init_Exti( );
 
   Init_RTC();
 
+  MX_GPIO_Init();
+
   APPE_Init( );
+
+  HAL_GPIO_WritePin(PS3V3_GPIO_Port, PS3V3_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(PS5V_GPIO_Port, PS5V_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
 
   while(1)
   {

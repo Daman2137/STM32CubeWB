@@ -22,6 +22,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "app_common.h"
 #include "stm32wbxx_it.h"
+#include "main.h"
    
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -174,6 +175,11 @@ void IPCC_C1_RX_IRQHandler(void)
 {
   HW_IPCC_Rx_Handler();
   return;
+}
+
+void EXTI0_IRQHandler(void)
+{
+	HAL_GPIO_EXTI_IRQHandler(B4_Pin);
 }
 
 

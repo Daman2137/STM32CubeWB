@@ -33,4 +33,20 @@ extern RTC_HandleTypeDef hrtc; /**< RTC handler declaration */
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
+#define LED_GREEN_Pin GPIO_PIN_2
+#define LED_GREEN_GPIO_Port GPIOA
+#define LED_BLUE_Pin GPIO_PIN_5
+#define LED_BLUE_GPIO_Port GPIOB
+#define LED_RED_Pin GPIO_PIN_12
+#define LED_RED_GPIO_Port GPIOC
+#define PS3V3_Pin GPIO_PIN_13
+#define PS3V3_GPIO_Port GPIOB
+#define PS5V_Pin GPIO_PIN_14
+#define PS5V_GPIO_Port GPIOB
+#define MOD_Pin GPIO_PIN_9
+#define MOD_GPIO_Port GPIOD
+#define B4_Pin GPIO_PIN_0
+#define B4_GPIO_Port GPIOA
+#define B4_EXTI_IRQn EXTI0_IRQn
+
 #endif /* __MAIN_H */
