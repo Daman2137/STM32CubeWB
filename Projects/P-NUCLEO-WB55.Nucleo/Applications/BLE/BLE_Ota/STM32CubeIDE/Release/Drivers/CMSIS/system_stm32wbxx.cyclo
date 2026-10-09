@@ -1,5 +1,0 @@
-P:/STM32CubeWB/Projects/P-NUCLEO-WB55.Nucleo/Applications/BLE/BLE_Ota/Core/Src/system_stm32wbxx.c:214:16:CheckFwAppValidity	3
-P:/STM32CubeWB/Projects/P-NUCLEO-WB55.Nucleo/Applications/BLE/BLE_Ota/Core/Src/system_stm32wbxx.c:254:13:JumpFwApp	1
-P:/STM32CubeWB/Projects/P-NUCLEO-WB55.Nucleo/Applications/BLE/BLE_Ota/Core/Src/system_stm32wbxx.c:352:13:JumpSelectionOnPowerUp	2
-P:/STM32CubeWB/Projects/P-NUCLEO-WB55.Nucleo/Applications/BLE/BLE_Ota/Core/Src/system_stm32wbxx.c:395:6:SystemInit	11
-P:/STM32CubeWB/Projects/P-NUCLEO-WB55.Nucleo/Applications/BLE/BLE_Ota/Core/Src/system_stm32wbxx.c:538:6:SystemCoreClockUpdate	5
