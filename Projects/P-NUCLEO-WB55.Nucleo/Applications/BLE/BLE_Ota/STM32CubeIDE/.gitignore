@@ -200,3 +200,4 @@ Debug/makefile
 *.mk
 *.o
 Debug/makefile
+Release/
