@@ -47,6 +47,9 @@
 #include "dbg_trace.h"
 #include "gpio.h"
 
+extern uint32_t dbg_reset_device;
+extern uint32_t dbg_reset_ipcc;
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
 /* Private macros ------------------------------------------------------------*/
@@ -92,6 +95,21 @@ int main( void )
 
   MX_GPIO_Init();
 
+  uint32_t rfclk = __HAL_RCC_GET_RFWAKEUP_SOURCE();
+
+  if (rfclk == RCC_RFWKPCLKSOURCE_LSE)
+  {
+  	printf("RF wakeup: LSE\r\n");
+  }
+  else if (rfclk == RCC_RFWKPCLKSOURCE_HSE_DIV1024)
+  {
+  	printf("RF wakeup: HSE/1024\r\n");
+  }
+  else
+  {
+   	printf("RF wakeup: 0x%08lX\r\n", rfclk);
+  }
+
   APPE_Init( );
 
   HAL_GPIO_WritePin(PS3V3_GPIO_Port, PS3V3_Pin, GPIO_PIN_SET);
@@ -122,10 +140,12 @@ static void Init_Exti( void )
 
 static void Reset_Device( void )
 {
+  dbg_reset_device = 1;
 #if ( CFG_HW_RESET_BY_FW == 1 )
   Reset_BackupDomain();
 
   Reset_IPCC();
+  dbg_reset_ipcc = 1;
 #endif
 
   return;

@@ -48,6 +48,13 @@ PLACE_IN_SECTION("MB_MEM2") ALIGN(4) static uint8_t	SystemSpareEvtBuffer[sizeof(
 PLACE_IN_SECTION("MB_MEM2") ALIGN(4) static uint8_t	BleSpareEvtBuffer[sizeof(TL_PacketHeader_t) + TL_EVT_HDR_SIZE + 255];
 
 /* Global variables ----------------------------------------------------------*/
+volatile uint32_t dbg_reset_device = 0;
+volatile uint32_t dbg_reset_ipcc = 0;
+volatile uint32_t dbg_tl_before = 0;
+volatile uint32_t dbg_tl_after = 0;
+volatile uint32_t dbg_cr4_before = 0;
+volatile uint32_t dbg_cr4_after = 0;
+volatile uint32_t dbg_cpu2_ready = 0;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemPower_Config( void );
 static void appe_Tl_Init( void );
@@ -145,9 +152,15 @@ static void appe_Tl_Init( void )
   tl_mm_config.p_SystemSpareEvtBuffer = SystemSpareEvtBuffer;
   tl_mm_config.p_AsynchEvtPool = EvtPool;
   tl_mm_config.AsynchEvtPoolSize = POOL_SIZE;
-  TL_MM_Init( &tl_mm_config );
+  TL_MM_Init(&tl_mm_config);
+
+  dbg_tl_before = 1;
+  dbg_cr4_before = PWR->CR4;
 
   TL_Enable();
+
+  dbg_cr4_after = PWR->CR4;
+  dbg_tl_after = 1;
 
   return;
 }
@@ -208,6 +221,7 @@ static void APPE_SysUserEvtRx( void * pPayload )
   switch(p_sys_event->subevtcode)
   {
     case SHCI_SUB_EVT_CODE_READY:
+      dbg_cpu2_ready = 1;
       ((tSHCI_UserEvtRxParam*)pPayload)->status = APPE_SysevtReadyProcessing( (SHCI_C2_Ready_Evt_t*)p_sys_event->payload );
       break;
 
